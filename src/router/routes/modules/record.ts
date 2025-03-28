@@ -1,4 +1,5 @@
 import { AppRouteRecordRaw } from '../types'
+
 export const DEFAULT_LAYOUT = () => import('@/layout/default-layout.vue')
 
 const RECORD: AppRouteRecordRaw = {
@@ -19,6 +20,16 @@ const RECORD: AppRouteRecordRaw = {
       component: () => import('@/views/record/table/index.vue'),
       meta: {
         locale: 'menu.record.table',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
+    {
+      path: '/record/password',
+      name: 'Password',
+      component: () => import('@/views/record/password/index.vue'),
+      meta: {
+        locale: 'menu.record.password',
         requiresAuth: true,
         roles: ['*'],
       },

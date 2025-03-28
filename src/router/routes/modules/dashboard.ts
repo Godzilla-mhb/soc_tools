@@ -61,7 +61,7 @@ const DASHBOARD: AppRouteRecordRaw = {
         requiresAuth: true,
         roles: ['admin'],
       },
-    },
+    }
   ],
 }
 

@@ -8,7 +8,7 @@
       </a-space>
     </div>
     <ul class="right-side">
-      <li>
+      <li v-if="appStore.device !== 'mobile'">
         <a-tooltip :content="$t('settings.search')">
           <a-button class="nav-btn"
                     type="outline"
@@ -46,7 +46,7 @@
           </template>
         </a-dropdown>
       </li>
-      <li>
+      <li v-if="appStore.device !== 'mobile'">
         <a-tooltip :content="theme === 'light' ? $t('settings.navbar.theme.toDark') : $t('settings.navbar.theme.toLight')">
           <a-button class="nav-btn"
                     type="outline"
@@ -59,7 +59,7 @@
           </a-button>
         </a-tooltip>
       </li>
-      <li>
+      <li v-if="appStore.device !== 'mobile'">
         <a-tooltip :content="$t('settings.navbar.alerts')">
           <div class="message-box-trigger">
             <a-badge :count="9"
@@ -84,7 +84,7 @@
           </template>
         </a-popover>
       </li>
-      <li>
+      <li v-if="appStore.device !== 'mobile'">
         <a-tooltip :content="isFullscreen ? $t('settings.navbar.screen.toExit') : $t('settings.navbar.screen.toFull')">
           <a-button class="nav-btn"
                     type="outline"
@@ -97,7 +97,7 @@
           </a-button>
         </a-tooltip>
       </li>
-      <li>
+      <li v-if="appStore.device !== 'mobile'">
         <a-tooltip :content="$t('settings.title')">
           <a-button class="nav-btn"
                     type="outline"
@@ -145,30 +145,6 @@
                 <span>
                   {{ $t('messageBox.userSettings') }}
                 </span>
-              </a-space>
-            </a-doption>
-            <a-doption>
-              <a-space @click="open('/shop-vite')">
-                <icon-tag />
-                <span>shop vite 付费版本</span>
-              </a-space>
-            </a-doption>
-            <a-doption>
-              <a-space @click="open('/admin-plus')">
-                <icon-tag />
-                <span>admin plus 付费版本</span>
-              </a-space>
-            </a-doption>
-            <a-doption>
-              <a-space @click="open('/admin-pro')">
-                <icon-tag />
-                <span>admin pro 付费版本</span>
-              </a-space>
-            </a-doption>
-            <a-doption>
-              <a-space @click="open('/vue-admin-better')">
-                <icon-tag />
-                <span>admin better 开源版</span>
               </a-space>
             </a-doption>
             <a-doption>
@@ -317,6 +293,17 @@ const open = (val: string) => {
 
   .trigger-btn {
     margin-left: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    .right-side {
+      padding-right: 10px;
+      li {
+        padding: 0 5px;
+      }
+    }
   }
 }
 </style>

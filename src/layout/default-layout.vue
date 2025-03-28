@@ -1,6 +1,6 @@
 <template>
   <a-layout class="layout"
-            :class="{ mobile: appStore.hideMenu }">
+            :class="{ mobile: appStore.device === 'mobile' }">
     <div v-if="navbar"
          class="layout-navbar">
       <NavBar />
@@ -27,7 +27,7 @@
             <Menu />
           </div>
         </a-layout-sider>
-        <a-drawer v-if="hideMenu"
+        <a-drawer v-if="appStore.device === 'mobile'"
                   :visible="drawerVisible"
                   placement="left"
                   :footer="false"
@@ -55,7 +55,7 @@ import Menu from "@/components/menu/index.vue";
 import NavBar from "@/components/navbar/index.vue";
 import TabBar from "@/components/tab-bar/index.vue";
 // import usePermission from "@/hooks/permission";
-// import useResponsive from "@/hooks/responsive";
+import useResponsive from "@/hooks/responsive";
 import { useAppStore } from "@/store";
 import { computed, onMounted, provide, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -67,7 +67,7 @@ const appStore = useAppStore();
 const router = useRouter();
 const route = useRoute();
 // const permission = usePermission();
-// useResponsive(true);
+useResponsive(true);
 const navbarHeight = `60px`;
 const navbar = computed(() => appStore.navbar);
 const renderMenu = computed(() => appStore.menu && !appStore.topMenu);
@@ -78,7 +78,7 @@ const menuWidth = computed(() => {
 });
 const paddingStyle = computed(() => {
   const paddingLeft =
-    renderMenu.value && !hideMenu.value
+    renderMenu.value && !hideMenu.value && appStore.device !== 'mobile'
       ? { paddingLeft: `${menuWidth.value}px` }
       : {};
   const paddingTop = navbar.value ? { paddingTop: navbarHeight } : {};
@@ -113,6 +113,16 @@ onMounted(() => {
 .layout {
   width: 100%;
   height: 100%;
+
+  &.mobile {
+    .layout-content {
+      min-width: 100%;
+      .layout-navbar {
+        left: 0 !important;
+        width: 100% !important;
+      }
+    }
+  }
 
   .layout-sider {
     background: var(--color-menu-dark-bg);
@@ -215,6 +225,18 @@ onMounted(() => {
         .navbar {
           width: calc(100% - 50px) !important;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout {
+    .layout-content {
+      min-width: 100%;
+      .layout-navbar {
+        left: 0 !important;
+        width: 100% !important;
       }
     }
   }

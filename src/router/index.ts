@@ -93,6 +93,16 @@ const routes: Array<RouteRecordRaw> = [
           roles: ['*'],
         },
       },
+      {
+        path: '/record/password',
+        name: 'Password',
+        component: () => import('@/views/record/password/index.vue'),
+        meta: {
+          locale: 'menu.record.password',
+          requiresAuth: true,
+          roles: ['*'],
+        },
+      },
     ],
   },
 ]

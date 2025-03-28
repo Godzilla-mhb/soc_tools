@@ -63,7 +63,7 @@ export default defineComponent({
             backtrack(el, [...keys, el.name as string])
           })
         }
-      }
+      } 
       menuTree.value.forEach((el: RouteRecordRaw) => {
         if (isFind) return // Performance optimization
         backtrack(el, [el.name as string])
@@ -90,21 +90,19 @@ export default defineComponent({
         if (_route) {
           _route.forEach((element) => {
             let icon = element?.meta?.icon ? () => h(compile(`<${element?.meta?.icon}/>`)) : null
-            console.log('icon',icon)
-            console.log('title',element?.meta?.locale,() => h(compile(t(element?.meta?.locale || ''))))
             const node =
               element?.children && element?.children.length !== 0 ? (
                 <a-sub-menu
                   key={element?.name}
                   v-slots={{
-                    icon:() => h(compile(`<${element?.meta?.icon} />`)),
-                    title: () => h(compile(t(element?.meta?.locale || ''))),
+                    icon: () => element?.meta?.icon ? h(compile(`<${element?.meta?.icon}/>`)) : null,
+                    title: () => t(element?.meta?.locale || ''),
                   }}
                 >
                   {travel(element?.children)}
                 </a-sub-menu>
               ) : (
-                <a-menu-item key={element?.name} v-slots={{ icon }} onClick={() => goto(element)}>
+                <a-menu-item key={element?.name} v-slots={{ icon: () => element?.meta?.icon ? h(compile(`<${element?.meta?.icon}/>`)) : null }} onClick={() => goto(element)}>
                   {t(element?.meta?.locale || '')}
                 </a-menu-item>
               )

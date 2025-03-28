@@ -7,6 +7,7 @@ import localeBank from '@/views/dashboard/bank/locale/zh-CN'
 import localeId from '@/views/dashboard/id/locale/zh-CN'
 import localeWeibo from '@/views/dashboard/weibo/locale/zh-CN'
 import localeRecord from '@/views/record/table/locale/zh-CN'
+import localePassword from '@/views/record/password/locale/zh-CN'
 
 // import localeCardList from '@/views/list/card/locale/zh-CN'
 // import localeSearchTable from '@/views/list/search-table/locale/zh-CN'
@@ -56,6 +57,7 @@ export default {
   // ...localeLogin,
   ...localeIp,
   ...localeIphone,
+  ...localePassword,
   // ...localeSearchTable,
   // ...localeCardList,
   // ...localeStepForm,
